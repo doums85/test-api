@@ -1,10 +1,10 @@
 const app = require('express')();
 
-let chrome = {};
+let chromium = {};
 let puppeteer;
 
 if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-  chrome = require('@sparticuz/chromium');
+  chromium = require('@sparticuz/chromium');
   puppeteer = require('puppeteer-core');
 } else {
   puppeteer = require('puppeteer');
@@ -15,16 +15,13 @@ app.get('/api', async (req, res) => {
   let options = {};
 
   if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-    chrome.setHeadlessMode = true;
-
-    // Optional: If you'd like to disable webgl, true is the default.
-    chrome.setGraphicsMode = false;
+    chromium.setGraphicsMode = false;
 
     options = {
-      args: chrome.args,
-      defaultViewport: chrome.defaultViewport,
-      executablePath: await chrome.executablePath(),
-      headless: chrome.headless,
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
     };
   }
 
