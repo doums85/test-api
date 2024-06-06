@@ -15,16 +15,16 @@ app.get('/api', async (req, res) => {
   let options = {};
 
   if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-    chromium.setHeadlessMode = true;
+    chrome.setHeadlessMode = true;
 
     // Optional: If you'd like to disable webgl, true is the default.
-    chromium.setGraphicsMode = false;
+    chrome.setGraphicsMode = false;
 
     options = {
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
-      headless: chromium.headless,
+      args: chrome.args,
+      defaultViewport: chrome.defaultViewport,
+      executablePath: await chrome.executablePath(),
+      headless: chrome.headless,
     };
   }
 
