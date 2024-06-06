@@ -13,7 +13,10 @@ if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
 app.get('/api', async (req, res) => {
   console.log('Request received');
   let options = {};
-
+  console.log(
+    'AWS_LAMBDA_FUNCTION_VERSION',
+    process.env.AWS_LAMBDA_FUNCTION_VERSION
+  );
   if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
     chromium.setGraphicsMode = false;
 
@@ -22,6 +25,7 @@ app.get('/api', async (req, res) => {
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath(),
       headless: chromium.headless,
+      ignoreHTTPSErrors: true,
     };
   }
 
