@@ -34,10 +34,11 @@ app.get('/api', async (req, res) => {
     console.log('Browser launched');
     let page = await browser.newPage();
     await page.goto('https://www.google.com');
+    console.log('Page opened');
     res.send(await page.title());
   } catch (err) {
     console.error(err);
-    return null;
+    return res.status(500).send('Error');
   }
 });
 
